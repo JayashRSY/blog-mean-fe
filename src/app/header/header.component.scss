@@ -1,0 +1,24 @@
+:host {
+    display: block;
+    margin-bottom: 1rem;
+
+    mat-toolbar {
+        justify-content: space-between;
+
+        ul,li {
+            list-style: none;
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+
+            a {
+                text-decoration: none;
+                color: white;
+            }
+            .active-tab {
+                text-decoration: underline;
+            }
+        }
+
+    }
+}
