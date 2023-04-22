@@ -1,14 +1,16 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
 <mat-accordion multi="true"
-    *ngIf="posts.length>0">
+    *ngIf="posts.length>0 && !isLoading">
     <mat-expansion-panel *ngFor="let post of posts">
         <mat-expansion-panel-header>
             {{post.title}}
         </mat-expansion-panel-header>
         <div class="post-img">
-            <img [src]="post.imagePath" [alt]="post.title">
+            <img [src]="post.imagePath"
+                [alt]="post.title">
         </div>
         <p>{{post.content}}</p>
-        <mat-action-row>
+        <mat-action-row *ngIf="userIsAuthenticated && userId===post.creator">
             <button mat-button
                 color="primary"
                 [routerLink]="['/editPost', post.id]">EDIT</button>
@@ -18,6 +20,11 @@
         </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
+<mat-paginator [length]="totalPosts"
+    [pageSize]="postsPerPage"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="onChangedPage($event)"
+    *ngIf="posts.length>0"></mat-paginator>
 <div class="no-post"
     *ngIf="posts.length<=0">
     No Posts added yet...

@@ -1,7 +1,26 @@
 <mat-toolbar color="primary">
     <span>Z Blog</span>
-    <ul>
-        <li><a mat-button routerLink="/posts" routerLinkActive="active-tab">All Posts</a></li>
-        <li><a mat-button routerLink="/createPost" routerLinkActive="active-tab">New Post</a></li>
-    </ul>
+    <span>
+        <button mat-button
+            routerLink="/posts"
+            routerLinkActive="mat-accent">All Posts</button>
+        <button *ngIf="userIsAuthenticated"
+            mat-button
+            routerLink="/createPost"
+            routerLinkActive="mat-accent">
+            New Post</button>
+    </span>
+    <span>
+        <button *ngIf="!userIsAuthenticated"
+            mat-button
+            routerLink="/user/login"
+            routerLinkActive="mat-accent">Login</button>
+        <button *ngIf="!userIsAuthenticated"
+            mat-button
+            routerLink="/user/signup"
+            routerLinkActive="mat-accent">Signup</button>
+        <button *ngIf="userIsAuthenticated"
+            mat-button
+            (click)="onLogout()">Logout</button>
+    </span>
 </mat-toolbar>
